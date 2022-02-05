@@ -22,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =config("SECRET_KEY")
+# SECRET_KEY ="django-insecure-!8^gc0fkb9fa9k1ed_a-+vq_+))lp!k+3y4a0^e*ictz2zum0v"
+SECRET_KEY =config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -35,11 +36,11 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
+    'crispy_forms',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'blog',
     'users',
 ]
 
