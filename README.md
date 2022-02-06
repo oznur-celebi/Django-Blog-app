@@ -80,5 +80,40 @@ from .models import Profile
 
 admin.site.register(Profile)
 
-#
+# add this code to the settings
+
+MEDIA_ROOT = BASE_DIR / 'media' # this creates a folder called media for the userprofile pictures.
+MEDIA_URL = '/media/'
+
+# go to the database and add a userprofile, then media folder is automatic created.
+# make a new profile html
+
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+        </div>
+      </div>
+      <!-- FORM HERE -->
+    </div>
+{% endblock content %}
+
+# go the this webpage ann add the given url by given way to the main urls.py
+https://docs.djangoproject.com/en/4.0/howto/static-files/
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# my code is because of the security reason
+if settings.DEBUG:
+    urlpatterns  += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
