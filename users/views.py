@@ -21,6 +21,6 @@ def register(request):
 
 @login_required
 def profile(request):
-    user =User.objects.filter
+    # user =User.objects.filter
     return render(request, 'users/profile.html')
 
