@@ -1,7 +1,7 @@
 from dataclasses import fields
 from django import forms
-from django.contrib.auth.models import User
-from .models import Profile
+from django.contrib.auth.models import User, AbstractUser
+from .models import Profile, Bio
 from django.contrib.auth.forms import UserCreationForm
 from ckeditor.fields import RichTextField
 
@@ -19,12 +19,18 @@ class UserRegisterForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
     # bio = RichTextField(blank =True, null =True)
-    bio = forms.TextField()
+   # bio = forms.TextField()
     class Meta:
         model =User
-        fields = ['username', 'email', 'image']
+        fields = ['username', 'email',]
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta :
         model =Profile
-        field =['image']
+        fields =['image']
+
+class BioUpdateForm (forms.ModelForm):
+     class Meta:
+        model = Bio
+        fields = ['bio','location','birth_date']
+

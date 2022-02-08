@@ -135,4 +135,4 @@ def save_profile(sender, instance, **kwargs):
 
 
 ................codeblock end..................
-#
+#with signal,a Porfile Page will be automatically created  for every new user 
