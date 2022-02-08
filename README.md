@@ -134,5 +134,72 @@ def save_profile(sender, instance, **kwargs):
         instance.profile.save()
 
 
+# Creat a new model for the Profile edit
+
+class Bio(models.Model):
+     user = models.OneToOneField(User, on_delete =models.CASCADE)
+     bio = models.TextField(max_length=500, blank=True)
+     location = models.CharField(max_length=30, blank=True)
+     birth_date = models.DateField(null=True, blank=True)
+     def __str__(self):
+          return f'{self.user.username} Profile'
+
+# Create a multyform in forms.py for the Profile edit
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    #bio = RichTextField(blank =True, null =True)
+   #bio = forms.TextField()
+    class Meta:
+        model =User
+        fields = ['username', 'email',]
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta :
+        model =Profile
+        fields =['image']
+
+class BioUpdateForm (forms.ModelForm):
+     class Meta:
+        model = Bio
+        fields = ['bio','location','birth_date']
+
+
+# Create a view func in views for the Profile edit
+
+@login_required
+def profile_edit(request):
+    u_form =UserUpdateForm(instance =request.user) 
+    p_form =ProfileUpdateForm(instance =request.user.profile)
+    b_form =BioUpdateForm(instance =request.user.bio)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+        'b_form': b_form,
+
+    } 
+
+    return render(request, 'users/edit.html', context)
+
+
 ................codeblock end..................
-#with signal,a Porfile Page will be automatically created  for every new user 
+#with signal,a Porfile Page will be automatically created and saved for every new user 
+
+
+# edit html
+<form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+   
+        <fieldset class='form-group'>
+          <legend class="border-bottom mb-4">Profile Info</legend>
+          {{u_form|crispy}}
+          {{p_form|crispy}}
+          {{b_form|crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+   
+        </div>
+       </form>
+# Becase of the reason  multiparty form, "enctype="multipart/form-data"" must be added

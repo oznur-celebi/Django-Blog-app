@@ -18,8 +18,8 @@ class UserRegisterForm(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
-    # bio = RichTextField(blank =True, null =True)
-   # bio = forms.TextField()
+    #bio = RichTextField(blank =True, null =True)
+   #bio = forms.TextField()
     class Meta:
         model =User
         fields = ['username', 'email',]
