@@ -11,8 +11,9 @@
       </div>
       <!-- FORM HERE -->
      <p class="article-content">{{user.bio.bio }}</p>
-     
-      <button class="btn"><i class="fa fa-edit"></i><a class="ml-4" href="{% url 'edit' %}">EDIT</a></button> -->
+
+      <a class="btn btn-info" href="{% url 'edit' %}">EDIT</a>
+      <!-- <button class="btn"><i class="fa fa-edit"></i></button> --> 
     </div>
 {% endblock content %}
     

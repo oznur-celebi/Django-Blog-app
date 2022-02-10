@@ -12,6 +12,7 @@
       <small class="text-muted">{{ object.date_posted|date:"F d,Y" }}</small>
     </div>
     <h2><a class="article-title" href="#">{{object.title }}</a></h2>
+    <img class="img-thumbnail account-img" src="{{object.cover.url}}">
     <p class="article-content">{{object.content }}</p>
   </div>
 </article>
